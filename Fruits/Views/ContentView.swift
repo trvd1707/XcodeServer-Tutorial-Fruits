@@ -42,19 +42,17 @@ struct FruitRow: View {
 
 struct ContentView: View {
 	@ObservedObject var viewModel = FruitListViewModel()
-
-	var body: some View {
-		return
-			NavigationView {
-				List(viewModel.fruits) { fruit in
-					FruitRow(fruit: fruit)
-				}
-				.onAppear {
-					self.viewModel.loadFruits()
-				}
-				.navigationBarTitle("Fruits")
-			}
-	}
+  var body: some View {
+    NavigationView {
+      List(viewModel.fruits) { fruit in
+        FruitRow(fruit: fruit)
+      }
+      .onAppear {
+        viewModel.loadFruits()
+      }
+      .navigationBarTitle("Fruits")
+    }.navigationViewStyle(StackNavigationViewStyle())
+  }
 }
 
 #if DEBUG
